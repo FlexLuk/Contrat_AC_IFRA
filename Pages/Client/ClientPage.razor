@@ -1,4 +1,4 @@
-﻿@page "/client/ajout"
+﻿@page "/client/nouveau"
 
 <MudGrid>
     <MudItem Class="mud-width-full">
@@ -9,8 +9,8 @@
                 </MudContainer>
             </MudTabPanel>
             <MudTabPanel Icon="@Icons.Material.Filled.List" Text="Liste des clients">
-                <MudContainer Class="mt-2">
-                    Flex
+                <MudContainer Class="mt-4">
+                    <ListeClientPage />
                 </MudContainer>
             </MudTabPanel>
             <MudTabPanel Icon="@Icons.Material.Filled.PostAdd" Text="Informations associées">
