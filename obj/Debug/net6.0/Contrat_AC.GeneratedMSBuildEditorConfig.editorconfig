@@ -24,6 +24,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGlmaWNhdGlvbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Autorisation/Authentification.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEF1dGhlbnRpZmljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Client/AjoutClientPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XEFqb3V0Q2xpZW50UGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,6 +42,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/Autorisation/AuthentificationLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxBdXRoZW50aWZpY2F0aW9uTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/Autorisation/AutorisationNavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxBdXRvcmlzYXRpb25OYXZNZW51LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/Autorisation/Redirection.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxSZWRpcmVjdGlvbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/MainLayout.razor]

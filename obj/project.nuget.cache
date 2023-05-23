@@ -1,13 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "z8PIY6pV9SWu20/lGwqhEa9TqU2onR5zKtnf70P6hVcSi/aoD8IWu0jx+846a5dlBlJf8MtczwZMYMgkpHOpkA==",
+  "dgSpecHash": "NvREMUk6Cx8Lzzojud1IxU9IVVEO9ciX3IgTVNJMQ2j8Fcs1oY9qxV7VzfgoRlFrNeODMx1Jz7NP5qiL4lh5qg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Jean Luc\\source\\repos\\Contrat_AC_IFRA\\Contrat_AC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jean Luc\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Jean Luc\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
-    "C:\\Users\\Jean Luc\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\Jean Luc\\.nuget\\packages\\blazored.localstorage\\4.3.0\\blazored.localstorage.4.3.0.nupkg.sha512",
     "C:\\Users\\Jean Luc\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Jean Luc\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.7\\microsoft.aspnetcore.authorization.6.0.7.nupkg.sha512",
     "C:\\Users\\Jean Luc\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.7\\microsoft.aspnetcore.components.6.0.7.nupkg.sha512",
