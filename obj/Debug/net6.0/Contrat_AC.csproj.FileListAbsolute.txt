@@ -37,3 +37,42 @@ C:\Users\Flex\source\repos\Contrat_AC\obj\Debug\net6.0\refint\Contrat_AC.dll
 C:\Users\Flex\source\repos\Contrat_AC\obj\Debug\net6.0\Contrat_AC.pdb
 C:\Users\Flex\source\repos\Contrat_AC\obj\Debug\net6.0\Contrat_AC.genruntimeconfig.cache
 C:\Users\Flex\source\repos\Contrat_AC\obj\Debug\net6.0\ref\Contrat_AC.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\appsettings.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Contrat_AC.staticwebassets.runtime.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Contrat_AC.exe
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Contrat_AC.deps.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Contrat_AC.runtimeconfig.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Contrat_AC.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Contrat_AC.pdb
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Microsoft.AspNetCore.Components.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\Microsoft.JSInterop.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\MudBlazor.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.csproj.AssemblyReference.cache
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.AssemblyInfoInputs.cache
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.AssemblyInfo.cs
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.csproj.CoreCompileInputs.cache
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.RazorAssemblyInfo.cache
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.RazorAssemblyInfo.cs
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\staticwebassets\msbuild.Contrat_AC.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\staticwebassets\msbuild.build.Contrat_AC.props
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Contrat_AC.props
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Contrat_AC.props
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\scopedcss\bundle\Contrat_AC.styles.css
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.csproj.CopyComplete
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\refint\Contrat_AC.dll
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.pdb
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\Contrat_AC.genruntimeconfig.cache
+C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\obj\Debug\net6.0\ref\Contrat_AC.dll
