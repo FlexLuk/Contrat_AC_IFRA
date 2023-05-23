@@ -1,6 +1,9 @@
+using Contrat_AC.Controller.Autorisation;
+using Contrat_AC.Models.Autorisation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +15,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
 
+builder.Services.AddDbContext<AUTORISATIONContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("osiet_connection"));
+});
+
+builder.Services.AddScoped<IAutorisationService, AutorisationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
