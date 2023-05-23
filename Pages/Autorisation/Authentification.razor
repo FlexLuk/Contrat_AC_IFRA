@@ -1,0 +1,66 @@
+﻿@page "/authentification"
+@using System.ComponentModel.DataAnnotations;
+@layout Contrat_AC.Shared.Autorisation.AuthentificationLayout
+@inject ISnackbar Snackbar
+
+<EditForm OnSubmit="OnValidSubmit" Model="@user">
+    <MudGrid Justify="Justify.Center" Class="mt-n12">
+
+        <MudCard Style="width: 400px">
+            <MudGrid Justify="Justify.Center">
+                <h2><b>GESION DE CONTRAT AC IFRA</b></h2>
+            </MudGrid>
+            <MudGrid Justify="Justify.Center">
+                <MudPaper Elevation="0" Class="mb-4 mt-4">
+                    <MudImage Src="images/ifra-icone.png" Alt="IFRA logo" Height="80" />
+                </MudPaper>
+            </MudGrid>
+
+            <MudDivider />
+            <MudCardContent>
+                <MudGrid Justify="Justify.Center" Class="mb-2">
+                    <h3>Authentification</h3>
+                </MudGrid>
+                <DataAnnotationsValidator />
+                <MudTextField @bind-Value="TextValue" Label="Email" Variant="Variant.Outlined" Margin="Margin.Dense" For="(()=>user.email)"></MudTextField>
+                <MudTextField @bind-Value="TextValue" Label="Mot de passe" Variant="Variant.Outlined" Margin="Margin.Dense" class="mt-4" InputType="InputType.Password" For="(()=>user.password)"></MudTextField>
+                <MudGrid Justify="Justify.FlexEnd" Class="mt-1 pr-3 mb-1">
+                    <MudLink Href="#" Underline="Underline.Always">Mot de passe oublié</MudLink>
+                </MudGrid>
+
+            </MudCardContent>
+            <MudDivider />
+            <MudCardActions>
+                <MudGrid Justify="Justify.FlexEnd" Class="mt-2 mb-2 mr-1">
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="demo-form-button">Se connecter</MudButton>
+                </MudGrid>
+            </MudCardActions>
+        </MudCard>
+
+    </MudGrid>
+</EditForm>
+
+@code {
+    User user = new();
+    public bool Label_CheckBox1 { get; set; } = true;
+
+    class User
+    {
+        [Required(ErrorMessage = "Email est obligatoire")]
+        [EmailAddress(ErrorMessage = "Format email incorrect.")]
+        [StringLength(8, ErrorMessage = "", MinimumLength = 8)]
+        public string? email { get; set; }
+
+        [Required(ErrorMessage = "Mot de passe est obligatoire")]
+        [StringLength(8, ErrorMessage = "Le mot de passe ne peut pas être vide.")]
+        public string password { get; set; }
+    }
+
+    public string TextValue { get; set; }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        Snackbar.Add("Click sur le boutton se connecter.");
+    }
+
+}
