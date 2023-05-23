@@ -1,8 +1,12 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Jean Luc\\source\\repos\\Contrat_AC_IFRA\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\Flex\\source\\repos\\Contrat_AC\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Flex\\source\\repos\\Contrat_AC\\wwwroot\\images\\ifra-icone.png",
+      "PackagePath": "staticwebassets\\images\\ifra-icone.png"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Contrat_AC.Microsoft.AspNetCore.StaticWebAssets.props",
