@@ -21,8 +21,6 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<int> CreateUserAsync(User user)
         {
-            EncryptionandDecryption cryptage = new();
-            user.Password = cryptage.Encrypt(user.Password);
             await context.Users.AddAsync(user);
             int i = context.SaveChanges();
             return user.UserId;
@@ -91,12 +89,13 @@ namespace Contrat_AC.Controller.Autorisation
         public async Task<User?> GetValidUserCredentialAsync(string email, string password)
         {
             User? user = new();
-            EncryptionandDecryption cryptage = new();
+            //EncryptionandDecryption cryptage = new();
             user = await GetUserByEmailAsync(email);
 
             if (user != null)
             {
-                string _passwrd = cryptage.Decrypt(user.Password);
+                //string _passwrd = cryptage.Decrypt(user.Password);
+                string _passwrd = "";
                 if (password == _passwrd)
                 {
                     return user;

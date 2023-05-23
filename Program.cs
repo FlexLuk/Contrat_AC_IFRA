@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Contrat_AC.Controller.Autorisation;
 using Contrat_AC.Models.Autorisation;
 using Microsoft.AspNetCore.Components;
@@ -14,6 +15,7 @@ StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configurat
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
+builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddDbContext<AUTORISATIONContext>(options =>
 {
@@ -34,6 +36,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseRouting();
 
