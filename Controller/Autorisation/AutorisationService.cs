@@ -21,9 +21,16 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<int> CreateUserAsync(User user)
         {
-            await context.Users.AddAsync(user);
-            context.SaveChanges();
-            return user.UserId;
+            try
+            {
+                await context.Users.AddAsync(user);
+                context.SaveChanges();
+                return user.UserId;
+            }
+            catch (InvalidOperationException)
+            {
+                return 0;
+            }
         }
 
         public async Task<bool> CreateUserRoleAsync(UsersRole userRole)
