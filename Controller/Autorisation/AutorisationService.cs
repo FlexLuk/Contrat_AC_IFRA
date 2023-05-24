@@ -7,9 +7,9 @@ namespace Contrat_AC.Controller.Autorisation
     public class AutorisationService : IAutorisationService
     {
         readonly AUTORISATIONContext context;
-        public AutorisationService()
+        public AutorisationService(AUTORISATIONContext _context)
         {
-            context = new AUTORISATIONContext();
+            context = _context;
         }
 
         public async Task<bool> CreateRoleAsync(Role role)
@@ -43,7 +43,7 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<List<User>> GetAllUsersAsync()
         {
-            List<User> users;
+            List<User> users = new();
             users = await context.Users.ToListAsync();
             context.SaveChanges();
             return users;

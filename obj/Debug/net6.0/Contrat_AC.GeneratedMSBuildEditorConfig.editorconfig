@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEVucmVnaXN0cmVtZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/GestionUtilisateur.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEdlc3Rpb25VdGlsaXNhdGV1ci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/AjoutClientPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XEFqb3V0Q2xpZW50UGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
