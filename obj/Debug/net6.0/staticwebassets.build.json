@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tXYoyl049nfpGdae/LTbuJKOCfLQ+XaU8u803QbcXpQ=",
+  "Hash": "k3bOsKFzELJSY8yVvUBOUbiZ0f9l1hIUl+h/wEoEkVE=",
   "Source": "Contrat_AC",
   "BasePath": "_content/Contrat_AC",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Flex\\source\\repos\\Contrat_AC\\wwwroot\\images\\ifra-icone.png",
+      "SourceId": "Contrat_AC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Flex\\source\\repos\\Contrat_AC\\wwwroot\\",
+      "BasePath": "_content/Contrat_AC",
+      "RelativePath": "images/ifra-icone.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\ifra-icone.png"
     }
   ]
 }

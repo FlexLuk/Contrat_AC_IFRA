@@ -20,16 +20,48 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Flex/source/repos/Contrat_AC/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/Authentification.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEF1dGhlbnRpZmljYXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Flex/source/repos/Contrat_AC/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/DialogAjoutUtilisateur.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXERpYWxvZ0Fqb3V0VXRpbGlzYXRldXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/Enregistrement.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEVucmVnaXN0cmVtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/GestionUtilisateur.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEdlc3Rpb25VdGlsaXNhdGV1ci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/AjoutClientPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XEFqb3V0Q2xpZW50UGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/ClientPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XENsaWVudFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/ListeClientPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XExpc3RlQ2xpZW50UGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Flex/source/repos/Contrat_AC/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/Autorisation/AuthentificationLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxBdXRoZW50aWZpY2F0aW9uTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/Autorisation/AutorisationNavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxBdXRvcmlzYXRpb25OYXZNZW51LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/Autorisation/Redirection.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxSZWRpcmVjdGlvbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Flex/source/repos/Contrat_AC/Shared/MainLayout.razor]

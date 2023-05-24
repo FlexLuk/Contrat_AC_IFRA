@@ -1,5 +1,14 @@
 ﻿<MudNavMenu>
-    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-    <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
-    <MudNavLink Href="fetchdata" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Fetch data</MudNavLink>
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Accueil</MudNavLink>
+    <MudNavGroup Title="Client" Icon="@Icons.Material.Filled.PeopleAlt" Expanded="true">
+        <MudNavLink Icon="@Icons.Material.Filled.PersonAddAlt1" IconColor="Color.Success" Href="/client/nouveau">Nouveau client</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.AssignmentTurnedIn" IconColor="Color.Info" Href="/client/rapport">Rapport</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.PostAdd" IconColor="Color.Warning" Href="/client/information">Informations associées</MudNavLink>
+    </MudNavGroup>
+    <MudNavGroup Title="Contrat" Icon="@Icons.Material.Filled.Assignment" Expanded="true">
+        <MudNavLink Icon="@Icons.Material.Filled.AddBox" IconColor="Color.Success" Href="/contrat/ajout">Ajout contrat</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.List" IconColor="Color.Info" Href="/contrat/liste">liste contrat</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.AssignmentLate" IconColor="Color.Warning" Href="/contrat/information">Correction contrat</MudNavLink>
+    </MudNavGroup>
+    <MudNavLink Href="/administration" Icon="@Icons.Material.Filled.Settings">Administration</MudNavLink>
 </MudNavMenu>

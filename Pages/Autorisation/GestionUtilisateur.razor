@@ -1,0 +1,157 @@
+﻿@using Contrat_AC.AuthetificationState.Data;
+@using Contrat_AC.Controller.Autorisation;
+@using Contrat_AC.Models.Autorisation;
+@inject IAutorisationService authService
+@inject IDialogService Dialog
+@inject ISnackbar Snackbar
+<style>
+    .selected {
+        background-color: #1E88E5 !important;
+    }
+
+        .selected > td {
+            color: white !important;
+        }
+
+            .selected > td .mud-input {
+                color: white !important;
+            }
+
+    .my-custom-class {
+        backdrop-filter: blur(10px);
+    }
+</style>
+
+    <MudPaper>
+    <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" OverrideStyles="false" Size="Size.Small">
+        <MudButton Color="Color.Success" Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.Add" OnClick="DialogAjoutUtilisateur">Ajouter</MudButton>
+        <MudButton Color="Color.Warning" Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.Edit">Modifier </MudButton>
+        <MudButton Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.DeleteForever">Supprimer</MudButton>
+    </MudButtonGroup>
+</MudPaper>
+
+    <MudTable Items="@users" Dense="true" Hover="true"
+          Filter="new Func<User,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1" Breakpoint="Breakpoint.Sm"
+          RowClassFunc="SelectedRowClassFunc" @ref="tableUser">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Liste des utilisateurs</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString1" Placeholder="Recherche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>ID</MudTh>
+        <MudTh>NOM</MudTh>
+        <MudTh>PRENOM</MudTh>
+        <MudTh>EMAIL</MudTh>
+        <MudTh>DATE DE CREATION</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="ID">@context.UserId</MudTd>
+        <MudTd DataLabel="NOM">@context.FirstName</MudTd>
+        <MudTd DataLabel="PRENOM">@context.LastName</MudTd>
+        <MudTd DataLabel="EMAIL">@context.AdressMail</MudTd>
+        <MudTd DataLabel="DATE DE CREATION">@context.DateCreate</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+<div class="d-flex flex-wrap mt-4">
+    <div style="min-width:200px;">
+            @*<MudText Inline="true" Class="align-self-center">Selected1: @selectedItem1?.FirstName</MudText>*@
+        <MudText Inline="true" Class="align-self-center">Selected1: @rowNumber</MudText>
+    </div>
+</div>
+
+@code{
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+    private User selectedItem1 = null;
+    MudTable<User>? tableUser;
+    private HashSet<User> selectedItems = new HashSet<User>();
+    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseButton = true, DisableBackdropClick=true };
+
+    private IEnumerable<User> users = new List<User>();
+    private int selectedRowNumber = -1;
+    private List<string> clickedEvents = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUserTable();
+    }
+
+    private async Task LoadUserTable(){
+        users = await authService.GetAllUsersAsync();
+    }
+
+    private bool FilterFunc1(User element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(User element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.UserId.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.AdressMail.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.FirstName} {element.LastName} {element.AdressMail}".Contains(searchString))
+            return true;
+
+        return false;
+    }
+
+    private async void DialogAjoutUtilisateur()
+    {
+        var dialogUser = Dialog.Show<DialogAjoutUtilisateur>("Ajout d'un nouveau utilisateur", maxWidth);
+        var resultDialogUser = await dialogUser.Result;
+        if (!resultDialogUser.Cancelled)
+        {
+            //bool reponse = ;
+            if ((bool)resultDialogUser.Data)
+            {
+                Snackbar.Add("Enregistrement réussi.", Severity.Success);
+                await LoadUserTable();
+                StateHasChanged();
+            }else{
+                Snackbar.Add("Erreur d'enregistrement.", Severity.Error);
+                await LoadUserTable();
+                StateHasChanged();
+            }
+        }
+    }
+
+    void SelectedItemsChanged(HashSet<User> items)
+    {
+        Snackbar.Add("Selected item changed.");
+    }
+
+    private string SelectedRowClassFunc(User _user, int rowNumber)
+    {
+        if (selectedRowNumber == rowNumber)
+        {
+            selectedRowNumber = -1;
+            selectedItem1 = null;
+            return string.Empty;
+        }
+        else if (tableUser.SelectedItem != null && tableUser.SelectedItem.Equals(_user))
+        {
+            selectedRowNumber = rowNumber;
+            return "selected";
+        }
+        else
+        {
+
+            this.rowNumber = rowNumber;
+            return string.Empty;
+        }
+    }
+    int rowNumber;
+}
