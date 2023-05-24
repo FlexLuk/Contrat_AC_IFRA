@@ -107,7 +107,7 @@
 </MudGrid>
 
 @code {
-    private string nom = "", prenom = "", fonction = "", typePieceIdentite = "CIN", pays = "", ville = "", delivreA = "", lieuNaissance = "";
+    private string nom = "", prenom = "", fonction = "", typePieceIdentite = "", pays = "", ville = "", delivreA = "", lieuNaissance = "";
     string? cin, domicile, telephone;
     int? codePostale;
     public PatternMask cinMask = new PatternMask("### ### ### ###")
@@ -143,7 +143,7 @@
             Nom = nom;
         }
         // Note: this is important so the MudSelect can compare pizzas
-        public override bool Equals(object o)
+        public override bool Equals(object? o)
         {
             var other = o as TypeIdentite;
             return other?.Nom == Nom;

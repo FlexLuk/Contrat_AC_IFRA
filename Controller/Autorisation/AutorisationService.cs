@@ -6,7 +6,7 @@ namespace Contrat_AC.Controller.Autorisation
 {
     public class AutorisationService : IAutorisationService
     {
-        AUTORISATIONContext context;
+        readonly AUTORISATIONContext context;
         public AutorisationService()
         {
             context = new AUTORISATIONContext();
@@ -22,7 +22,7 @@ namespace Contrat_AC.Controller.Autorisation
         public async Task<int> CreateUserAsync(User user)
         {
             await context.Users.AddAsync(user);
-            int i = context.SaveChanges();
+            context.SaveChanges();
             return user.UserId;
         }
 
@@ -35,7 +35,7 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<List<Role>> GetAllRolesAsync(int userID)
         {
-            List<Role> cont = new();
+            List<Role> cont;
             cont = await context.Roles.ToListAsync();
             context.SaveChanges();
             return cont;
@@ -43,7 +43,7 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<List<User>> GetAllUsersAsync()
         {
-            List<User> users = new();
+            List<User> users;
             users = await context.Users.ToListAsync();
             context.SaveChanges();
             return users;
@@ -51,7 +51,7 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<User?> GetUserByIDAsync(int userID)
         {
-            User? us = new();
+            User? us;
             us = await context.Users.Where(u => u.UserId == userID).FirstOrDefaultAsync();
             context.SaveChanges();
             return us;
@@ -59,7 +59,7 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<User?> GetUserByEmailAsync(string email)
         {
-            User? us = new();
+            User? us;
             try
             {
                 us = await context.Users.Where(u => u.AdressMail == email).FirstAsync();
@@ -72,29 +72,31 @@ namespace Contrat_AC.Controller.Autorisation
             }
         }
 
-        public async Task<string> GetUserRoleAsync(string email)
+        public async Task<string?> GetUserRoleAsync(string email)
         {
-            User? us = new();
+            User? us;
             UsersRole? uRl = new();
             Role? rl = new();
             us = await context.Users.Where(u => u.AdressMail == email).FirstOrDefaultAsync();
             context.SaveChanges();
-            uRl = await context.UsersRoles.Where(u => u.UserId == us.UserId).FirstOrDefaultAsync();
+            if (us != null)
+                uRl = await context.UsersRoles.Where(u => u.UserId == us.UserId).FirstOrDefaultAsync();
             context.SaveChanges();
-            rl = await context.Roles.Where(u => u.RoleId == uRl.RoleId).FirstOrDefaultAsync();
+            if (uRl != null)
+                rl = await context.Roles.Where(u => u.RoleId == uRl.RoleId).FirstOrDefaultAsync();
             context.SaveChanges();
-            return rl.RoleName;
+            if (rl != null)
+                return rl.RoleName;
+            else return null;
         }
 
         public async Task<User?> GetValidUserCredentialAsync(string email, string password)
         {
-            User? user = new();
-            //EncryptionandDecryption cryptage = new();
+            User? user;
             user = await GetUserByEmailAsync(email);
 
             if (user != null)
             {
-                //string _passwrd = cryptage.Decrypt(user.Password);
                 string _passwrd = "";
                 if (password == _passwrd)
                 {
@@ -114,7 +116,7 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<List<UsersRole>> GetUserRoleListByUserAsync(int idUser)
         {
-            List<UsersRole>? usRole = new List<UsersRole>();
+            List<UsersRole> usRole;
             usRole = await context.UsersRoles.Where(u => u.UserId == idUser).ToListAsync();
             context.SaveChanges();
             return usRole;

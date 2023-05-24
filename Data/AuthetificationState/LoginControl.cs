@@ -1,7 +1,7 @@
 using Contrat_AC.Models.Autorisation;
 using Microsoft.EntityFrameworkCore;
 
-namespace LYRA.Data
+namespace Contrat_AC.AuthetificationState.Data
 {
     public class LoginControl : ILoginControl
     {
@@ -25,24 +25,24 @@ namespace LYRA.Data
             return roleIDs;
         }
 
-        public async Task<List<UsersRole>> GetRoleUserAuthentified(User utilisateur)
+        public async Task<List<Role>> GetRoleUserAuthentified(User utilisateur)
         {
             List<int> roleIDs = await GetRoleIdUSer(utilisateur);
-            List<UsersRole> roleNames = new List<UsersRole>();
+            List<Role> roleNames = new List<Role>();
             foreach (var item in roleIDs)
             {
-                UsersRole? urole = new UsersRole();
-                urole = await context.UsersRoles.Where(x => x.RoleId == item).FirstOrDefaultAsync();
+                Role? urole = new Role();
+                urole = await context.Roles.Where(x => x.RoleId == item).FirstOrDefaultAsync();
                 if (urole != null)
                     roleNames.Add(urole);
             }
             return roleNames;
         }
 
-        public async Task<User?> VerificationUtilisateur(string email, string passswordHash)
+        public async Task<User?> VerificationUtilisateur(string email, string? passsword)
         {
             User? user = await context.Users.Where(x => x.AdressMail == email).FirstOrDefaultAsync();
-            if (user != null && BCrypt.Net.BCrypt.Verify(passswordHash, user.PasswordHash))
+            if (user != null && BCrypt.Net.BCrypt.Verify(passsword, user.PasswordHash))
                 return user;
             else
                 return null;

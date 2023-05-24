@@ -1,9 +1,16 @@
 ﻿@page "/authentification"
 @using System.ComponentModel.DataAnnotations;
+@using Contrat_AC.AuthetificationState.Data
+@using Contrat_AC.Data.AuthetificationState
+@using Contrat_AC.Models.Autorisation
 @layout Contrat_AC.Shared.Autorisation.AuthentificationLayout
 @inject ISnackbar Snackbar
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject ILoginControl LogCtrl
 
-<EditForm OnSubmit="OnValidSubmit" Model="@user">
+<EditForm OnValidSubmit="OnValidSubmit" Model="@user">
     <MudGrid Justify="Justify.Center" Class="mt-n12">
 
         <MudCard Style="width: 400px">
@@ -22,10 +29,16 @@
                     <h3>Authentification</h3>
                 </MudGrid>
                 <DataAnnotationsValidator />
-                <MudTextField @bind-Value="TextValue" Label="Email" Variant="Variant.Outlined" Margin="Margin.Dense" For="(()=>user.email)"></MudTextField>
-                <MudTextField @bind-Value="TextValue" Label="Mot de passe" Variant="Variant.Outlined" Margin="Margin.Dense" class="mt-4" InputType="InputType.Password" For="(()=>user.password)"></MudTextField>
+                <MudTextField @bind-Value="user.AdressMail" Label="Email" Variant="Variant.Outlined" Margin="Margin.Dense" For="(()=>user.AdressMail)"></MudTextField>
+                <MudTextField @bind-Value="user.Password" Label="Mot de passe" Variant="Variant.Outlined" Margin="Margin.Dense" class="mt-4" InputType="InputType.Password" For="(()=>user.Password)"></MudTextField>
                 <MudGrid Justify="Justify.FlexEnd" Class="mt-1 pr-3 mb-1">
-                    <MudLink Href="#" Underline="Underline.Always">Mot de passe oublié</MudLink>
+                    <MudItem>
+                        @*<ValidationSummary  />*@
+                    </MudItem>
+                    <MudItem>
+                        <MudLink Href="#" Underline="Underline.Always">Mot de passe oublié</MudLink>
+                    </MudItem>
+
                 </MudGrid>
 
             </MudCardContent>
@@ -42,25 +55,49 @@
 
 @code {
     User user = new();
-    public bool Label_CheckBox1 { get; set; } = true;
+    public bool resteConnecterCheckBox { get; set; } = true;
 
-    class User
+    protected override async void OnInitialized()
     {
-        [Required(ErrorMessage = "Email est obligatoire")]
-        [EmailAddress(ErrorMessage = "Format email incorrect.")]
-        [StringLength(8, ErrorMessage = "", MinimumLength = 8)]
-        public string? email { get; set; }
-
-        [Required(ErrorMessage = "Mot de passe est obligatoire")]
-        [StringLength(8, ErrorMessage = "Le mot de passe ne peut pas être vide.")]
-        public string password { get; set; }
+        var EmailAdress = await localStorage.GetItemAsync<string>("emailAddress");
+        if (EmailAdress != null)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            //editContext = new EditContext(utilisateur);
+        }
     }
 
-    public string TextValue { get; set; }
-
-    private void OnValidSubmit(EditContext context)
+    private async Task OnValidSubmit(EditContext context)
     {
-        Snackbar.Add("Click sur le boutton se connecter.");
+        User? utilisateur = new();
+        if (user.Password != null)
+            utilisateur = await LogCtrl.VerificationUtilisateur(user.AdressMail, user.Password);
+
+        if (utilisateur != null)
+        {
+            List<Role> uroles = await LogCtrl.GetRoleUserAuthentified(utilisateur);
+            List<string> roles = new();
+            foreach (var item in uroles)
+            {
+                if (item.RoleName != null)
+                    roles.Add(item.RoleName.Trim());
+            }
+            await localStorage.SetItemAsync("emailAddress", utilisateur.AdressMail);
+            await localStorage.SetItemAsync("loginNom", utilisateur.FirstName);
+            await localStorage.SetItemAsync("loginPrenom", utilisateur.LastName);
+            await localStorage.SetItemAsync("roles", roles);
+            ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(utilisateur, roles);
+
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            Snackbar.Configuration.SnackbarVariant = Variant.Outlined;
+            Snackbar.Add("Email ou mot de passe incorrect.", Severity.Error);
+        }
     }
 
 }
