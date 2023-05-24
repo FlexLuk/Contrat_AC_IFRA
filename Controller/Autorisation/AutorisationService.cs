@@ -69,7 +69,7 @@ namespace Contrat_AC.Controller.Autorisation
             User? us;
             try
             {
-                us = await context.Users.Where(u => u.AdressMail == email).FirstAsync();
+                us = await context.Users.Where(u => u.AdressMail == email.Trim()).FirstAsync();
                 context.SaveChanges();
                 return us;
             }
@@ -127,6 +127,13 @@ namespace Contrat_AC.Controller.Autorisation
             usRole = await context.UsersRoles.Where(u => u.UserId == idUser).ToListAsync();
             context.SaveChanges();
             return usRole;
+        }
+
+        public async Task<bool> SupprimerUser(User user)
+        {
+            context.Users.Remove(user);
+            int i = await context.SaveChangesAsync();
+            return i > 0;
         }
     }
 }

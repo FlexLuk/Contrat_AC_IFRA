@@ -12,7 +12,7 @@
 }
 <MudDivider Class="" />
 <MudPaper Square=true Class="pl-2 pr-2">
-    <MudLink Typo="Typo.caption">Le mot de passe doit contenir au minimum 8 caractères, à savoir : au moins une lettre minuscule, une lettre majuscule et un chiffre</MudLink>
+    @*<MudLink Typo="Typo.caption">Le mot de passe doit contenir au minimum 8 caractères, à savoir : au moins une lettre minuscule, une lettre majuscule et un chiffre</MudLink>*@
 </MudPaper>
 <MudContainer Class="mb-4">
     <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
@@ -30,20 +30,6 @@
                               Validation="@(new EmailAddressAttribute() {ErrorMessage = "L'adresse mail est invalide"})"></MudTextField>
             </MudItem>
 
-        </MudGrid>
-        <MudGrid Class="mb-2">
-            <MudItem xs="8" sm="4">
-                <MudDatePicker Date="DateTime.Now" Editable=false Placeholder="Date de création" Class="mt-n1"></MudDatePicker>
-            </MudItem>
-            <MudItem xs="8" sm="4">
-                <MudTextField @bind-Value="user.Password" T="string" Label="Password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"
-                              Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
-                              RequiredError="Password requis!" @ref="pwField1"></MudTextField>
-            </MudItem>
-            <MudItem xs="8" sm="4">
-                <MudTextField T="string" Label="Retape password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"
-                              Validation="@(new Func<string, string>(PasswordMatch))"></MudTextField>
-            </MudItem>
         </MudGrid>
         <MudDivider Class="mt-4" />
         <MudGrid Class="mt-1" Justify="Justify.FlexEnd">
@@ -68,11 +54,11 @@
             <MudItem>
                 <MudButton HtmlTag="label"
                            Variant="Variant.Outlined"
-                           Color="Color.Success"
+                           Color="Color.Info"
                            Disabled=saveClick
                            OnClick="OnValidSubmit"
-                           StartIcon="@Icons.Material.Filled.SaveAlt">
-                    <span style="padding-top:5px">Enregistrer</span>
+                           StartIcon="@Icons.Material.Filled.Edit">
+                    <span style="padding-top:5px">Modifier</span>
                 </MudButton>
             </MudItem>
         </MudGrid>
@@ -83,9 +69,9 @@
     bool success = false;
     string[] errors = { };
     MudTextField<string>? pwField1;
-    private string password, repassword;
+    private string password;
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-    User user = new User();
+    [Parameter] public User user { get; set; } = null!;
     MudForm? form;
     private bool saveClick = false;
 
