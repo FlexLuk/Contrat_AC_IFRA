@@ -7,9 +7,9 @@ namespace Contrat_AC.Controller.Autorisation
     public class AutorisationService : IAutorisationService
     {
         readonly AUTORISATIONContext context;
-        public AutorisationService()
+        public AutorisationService(AUTORISATIONContext _context)
         {
-            context = new AUTORISATIONContext();
+            context = _context;
         }
 
         public async Task<bool> CreateRoleAsync(Role role)

@@ -1,0 +1,55 @@
+﻿<MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+
+<MudDivider Class="" />
+
+<MudContainer Class="mb-4">
+    <MudGrid>
+        <MudItem xs="8" sm="4">
+            <MudTextField @bind-Value="nom" Label="Nom" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+        </MudItem>
+        <MudItem xs="8" sm="4">
+            <MudTextField @bind-Value="prenom" Label="Prénom" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+        </MudItem>
+        <MudItem xs="8" sm="4">
+            <MudTextField @bind-Value="email" Label="Addresse mail" Variant="Variant.Text" InputType="InputType.Email" Margin="Margin.Dense"></MudTextField>
+        </MudItem>
+
+    </MudGrid>
+    <MudGrid Class="mb-2">
+        <MudItem xs="8" sm="4">
+            <MudTextField @bind-Value="password" Label="Password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"></MudTextField>
+        </MudItem>
+        <MudItem xs="8" sm="4">
+            <MudTextField @bind-Value="repassword" Label="Retape password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"></MudTextField>
+        </MudItem>
+    </MudGrid>
+    <MudDivider Class="mt-4"/>
+    <MudGrid Class="mt-1" Justify="Justify.FlexEnd">
+        <MudItem>
+            <MudButton HtmlTag="label"
+                       Variant="Variant.Outlined"
+                       Color="Color.Warning"
+                       OnClick="(()=>MudDialog.Cancel())"
+                       StartIcon="@Icons.Material.Filled.RestartAlt">
+                <span style="padding-top:5px">Annuler</span>
+            </MudButton>
+        </MudItem>
+        <MudItem>
+            <MudButton HtmlTag="label"
+                       Variant="Variant.Outlined"
+                       Color="Color.Success"
+                       Disabled=true
+                       StartIcon="@Icons.Material.Filled.SaveAlt">
+                <span style="padding-top:5px">Enregistrer</span>
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+
+@code {
+    private string nom, prenom, email, password, repassword;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+
+}
