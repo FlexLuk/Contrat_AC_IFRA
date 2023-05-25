@@ -3,7 +3,7 @@
 @using Contrat_AC.Models.Autorisation;
 @inject IAutorisationService authService
 @inject IDialogService Dialog
-
+@inject ISnackbar Snackbar
 <style>
     .selected {
         background-color: #1E88E5 !important;
@@ -24,14 +24,15 @@
 
 <MudPaper>
     <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" OverrideStyles="false" Size="Size.Small">
-        <MudButton Color="Color.Success" Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.Add" OnClick="DialogAjoutUtilisateur">Ajouter</MudButton>
-        <MudButton Color="Color.Warning" Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.Edit">Modifier </MudButton>
-        <MudButton Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.DeleteForever">Supprimer</MudButton>
+        <MudButton Color="Color.Success" Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.Add" OnClick="AddUser">Ajouter</MudButton>
+        <MudButton Color="Color.Warning" Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.Edit" OnClick="EditUser">Modifier </MudButton>
+        <MudButton Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.DeleteForever" OnClick="DeleteUser">Supprimer</MudButton>
     </MudButtonGroup>
 </MudPaper>
 
-<MudTable Items="@users" Dense="true" Hover="true" Bordered="true" Striped="true"
-          Filter="new Func<User,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1" Breakpoint="Breakpoint.Sm">
+<MudTable Items="@users" Dense="true" Hover="true" T="User"
+          Filter="new Func<User,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1" Breakpoint="Breakpoint.Sm"
+          RowClassFunc="SelectedRowClassFunc" OnRowClick="RowClickEvent" @ref="tableUser">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Liste des utilisateurs</MudText>
         <MudSpacer />
@@ -56,26 +57,26 @@
     </PagerContent>
 </MudTable>
 
-<div class="d-flex flex-wrap mt-4">
-    <div style="min-width:200px;">
-        <MudText Inline="true" Class="align-self-center">Selected1: @selectedItem1?.FirstName</MudText>
-    </div>
-</div>
 @code {
-    private bool dense = false;
-    private bool hover = true;
-    private bool striped = false;
-    private bool bordered = false;
     private string searchString1 = "";
     private User selectedItem1 = null;
+    MudTable<User>? tableUser;
     private HashSet<User> selectedItems = new HashSet<User>();
-    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseButton = true, DisableBackdropClick=true };
+    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseButton = true, DisableBackdropClick = true };
 
     private IEnumerable<User> users = new List<User>();
+    private int selectedRowNumber = -1;
+    private List<string> clickedEvents = new();
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadUserTable();
+    }
+
+    private async Task LoadUserTable()
+    {
         users = await authService.GetAllUsersAsync();
+        StateHasChanged();
     }
 
     private bool FilterFunc1(User element) => FilterFunc(element, searchString1);
@@ -94,12 +95,121 @@
             return true;
         if ($"{element.FirstName} {element.LastName} {element.AdressMail}".Contains(searchString))
             return true;
+
         return false;
     }
 
-    private void DialogAjoutUtilisateur()
+    private void RowClickEvent(TableRowClickEventArgs<User> tableRowClickEventArgs)
     {
-        Dialog.Show<DialogAjoutUtilisateur>("Ajout d'un nouveau utilisateur", maxWidth);
+        clickedEvents.Add("Row clicked");
+    }
 
+    private async void AddUser()
+    {
+        var dialogUser = Dialog.Show<DialogAjoutUtilisateur>("Ajout d'un nouveau utilisateur", maxWidth);
+        var resultDialogUser = await dialogUser.Result;
+        if (!resultDialogUser.Cancelled)
+        {
+            if ((bool)resultDialogUser.Data)
+            {
+                Snackbar.Add("Enregistrement réussi.", Severity.Success);
+                await LoadUserTable();
+                StateHasChanged();
+            }
+            else
+            {
+                Snackbar.Add("Erreur d'enregistrement.", Severity.Error);
+                await LoadUserTable();
+                StateHasChanged();
+            }
+        }
+    }
+
+    private string SelectedRowClassFunc(User _user, int rowNumber)
+    {
+        if (selectedRowNumber == rowNumber)
+        {
+            selectedRowNumber = -1;
+            return string.Empty;
+        }
+        else if (tableUser.SelectedItem != null && tableUser.SelectedItem.Equals(_user))
+        {
+            selectedRowNumber = rowNumber;
+            return "selected";
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+    private async void DeleteUser()
+    {
+
+        var parameters = new DialogParameters();
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+        if (selectedItem1 != null)
+        {
+            string message = "Voulez-vous vraiment supprimer l'utilisateur " + selectedItem1.FirstName + " " + selectedItem1.LastName + " ?";
+            parameters.Add("ContentText", message);
+            parameters.Add("ButtonText", "Supprimer");
+            parameters.Add("Color", Color.Error);
+            var dialogDelete = Dialog.Show<DialogDeleteUtilisateur>("Suppression ", parameters, options);
+            var reponse = await dialogDelete.Result;
+            if (reponse.Cancelled)
+            {
+                selectedItem1 = null;
+            }
+            else
+            {
+                bool result = await authService.SupprimerUser(selectedItem1);
+                if (result)
+                {
+                    Snackbar.Add("Utilisateur supprimer avec succès.", Severity.Success);
+                    selectedItem1 = null;
+                }
+                else
+                {
+                    Snackbar.Add("Erreur lors de la suppression de l'utilisateur. Veuillez recommencer.", Severity.Error);
+                    selectedItem1 = null;
+                }
+                await LoadUserTable();
+            }
+        }
+        else
+        {
+            Snackbar.Add("Veuillez sélectionner un élément.", Severity.Warning);
+        }
+
+    }
+
+    private async void EditUser()
+    {
+        if (selectedItem1 != null)
+        {
+            DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseButton = true, DisableBackdropClick = true };
+            var parameters = new DialogParameters();
+            parameters.Add("user", selectedItem1);
+            var dialogUser = Dialog.Show<DialogModifierUtilisateur>("Modification utilisateur", parameters, options);
+            var resultDialogUser = await dialogUser.Result;
+            if (!resultDialogUser.Cancelled)
+            {
+                if ((bool)resultDialogUser.Data)
+                {
+                    Snackbar.Add("Modification réussi.", Severity.Success);
+                    await LoadUserTable();
+                    StateHasChanged();
+                }
+                else
+                {
+                    Snackbar.Add("Erreur d'enregistrement.", Severity.Error);
+                    await LoadUserTable();
+                    StateHasChanged();
+                }
+            }
+        }else{
+            Snackbar.Add("Veuillez sélectionner un élément.", Severity.Warning);
+        }
     }
 }

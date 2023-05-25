@@ -6,10 +6,6 @@ namespace Contrat_AC.Models.Autorisation;
 
 public partial class AUTORISATIONContext : DbContext
 {
-    public AUTORISATIONContext()
-    {
-    }
-
     public AUTORISATIONContext(DbContextOptions<AUTORISATIONContext> options)
         : base(options)
     {

@@ -21,9 +21,16 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<int> CreateUserAsync(User user)
         {
-            await context.Users.AddAsync(user);
-            context.SaveChanges();
-            return user.UserId;
+            try
+            {
+                await context.Users.AddAsync(user);
+                context.SaveChanges();
+                return user.UserId;
+            }
+            catch (InvalidOperationException)
+            {
+                return 0;
+            }
         }
 
         public async Task<bool> CreateUserRoleAsync(UsersRole userRole)
@@ -43,7 +50,7 @@ namespace Contrat_AC.Controller.Autorisation
 
         public async Task<List<User>> GetAllUsersAsync()
         {
-            List<User> users;
+            List<User> users = new();
             users = await context.Users.ToListAsync();
             context.SaveChanges();
             return users;
@@ -62,7 +69,7 @@ namespace Contrat_AC.Controller.Autorisation
             User? us;
             try
             {
-                us = await context.Users.Where(u => u.AdressMail == email).FirstAsync();
+                us = await context.Users.Where(u => u.AdressMail == email.Trim()).FirstAsync();
                 context.SaveChanges();
                 return us;
             }
@@ -120,6 +127,13 @@ namespace Contrat_AC.Controller.Autorisation
             usRole = await context.UsersRoles.Where(u => u.UserId == idUser).ToListAsync();
             context.SaveChanges();
             return usRole;
+        }
+
+        public async Task<bool> SupprimerUser(User user)
+        {
+            context.Users.Remove(user);
+            int i = await context.SaveChangesAsync();
+            return i > 0;
         }
     }
 }

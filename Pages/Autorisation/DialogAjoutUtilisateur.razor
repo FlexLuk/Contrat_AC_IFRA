@@ -1,55 +1,150 @@
-﻿<MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+﻿@using Contrat_AC.Controller.Autorisation
+@using Contrat_AC.Models.Autorisation
+@using System.Text.RegularExpressions
+@using System.ComponentModel.DataAnnotations
+@using BC = BCrypt.Net.BCrypt
+@inject IAutorisationService userService
+@inject ISnackbar Snackbar
 
+@if (saveClick)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+}
 <MudDivider Class="" />
-
+<MudPaper Square=true Class="pl-2 pr-2">
+    <MudLink Typo="Typo.caption">Le mot de passe doit contenir au minimum 8 caractères, à savoir : au moins une lettre minuscule, une lettre majuscule et un chiffre</MudLink>
+</MudPaper>
 <MudContainer Class="mb-4">
-    <MudGrid>
-        <MudItem xs="8" sm="4">
-            <MudTextField @bind-Value="nom" Label="Nom" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
-        </MudItem>
-        <MudItem xs="8" sm="4">
-            <MudTextField @bind-Value="prenom" Label="Prénom" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
-        </MudItem>
-        <MudItem xs="8" sm="4">
-            <MudTextField @bind-Value="email" Label="Addresse mail" Variant="Variant.Text" InputType="InputType.Email" Margin="Margin.Dense"></MudTextField>
-        </MudItem>
+    <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+        <MudGrid>
+            <MudItem xs="8" sm="4">
+                <MudTextField @bind-Value="user.FirstName" Label="Nom" Variant="Variant.Text" Margin="Margin.Dense"
+                              Required="true" RequiredError="Nom de l'utilisateur requis!"></MudTextField>
+            </MudItem>
+            <MudItem xs="8" sm="4">
+                <MudTextField @bind-Value="user.LastName" Label="Prénom" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="8" sm="4">
+                <MudTextField @bind-Value="user.AdressMail" Label="Addresse mail" Variant="Variant.Text" InputType="InputType.Email" Margin="Margin.Dense"
+                              Required="true" RequiredError="Email requis!"
+                              Validation="@(new EmailAddressAttribute() {ErrorMessage = "L'adresse mail est invalide"})"></MudTextField>
+            </MudItem>
 
-    </MudGrid>
-    <MudGrid Class="mb-2">
-        <MudItem xs="8" sm="4">
-            <MudTextField @bind-Value="password" Label="Password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"></MudTextField>
-        </MudItem>
-        <MudItem xs="8" sm="4">
-            <MudTextField @bind-Value="repassword" Label="Retape password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"></MudTextField>
-        </MudItem>
-    </MudGrid>
-    <MudDivider Class="mt-4"/>
-    <MudGrid Class="mt-1" Justify="Justify.FlexEnd">
-        <MudItem>
-            <MudButton HtmlTag="label"
-                       Variant="Variant.Outlined"
-                       Color="Color.Warning"
-                       OnClick="(()=>MudDialog.Cancel())"
-                       StartIcon="@Icons.Material.Filled.RestartAlt">
-                <span style="padding-top:5px">Annuler</span>
-            </MudButton>
-        </MudItem>
-        <MudItem>
-            <MudButton HtmlTag="label"
-                       Variant="Variant.Outlined"
-                       Color="Color.Success"
-                       Disabled=true
-                       StartIcon="@Icons.Material.Filled.SaveAlt">
-                <span style="padding-top:5px">Enregistrer</span>
-            </MudButton>
-        </MudItem>
-    </MudGrid>
+        </MudGrid>
+        <MudGrid Class="mb-2">
+            <MudItem xs="8" sm="4">
+                <MudDatePicker Date="DateTime.Now" Editable=false Placeholder="Date de création" Class="mt-n1"></MudDatePicker>
+            </MudItem>
+            <MudItem xs="8" sm="4">
+                <MudTextField @bind-Value="user.Password" T="string" Label="Password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"
+                              Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
+                              RequiredError="Password requis!" @ref="pwField1"></MudTextField>
+            </MudItem>
+            <MudItem xs="8" sm="4">
+                <MudTextField T="string" Label="Retape password" Variant="Variant.Text" InputType="InputType.Password" Margin="Margin.Dense"
+                              Validation="@(new Func<string, string>(PasswordMatch))"></MudTextField>
+            </MudItem>
+        </MudGrid>
+        <MudDivider Class="mt-4" />
+        <MudGrid Class="mt-1" Justify="Justify.FlexEnd">
+            <MudItem>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Error"
+                           OnClick="(()=>MudDialog.Cancel())"
+                           StartIcon="@Icons.Material.Filled.NotInterested">
+                    <span style="padding-top:5px">Annuler</span>
+                </MudButton>
+            </MudItem>
+            <MudItem>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Warning"
+                           OnClick="Reset"
+                           StartIcon="@Icons.Material.Filled.Refresh">
+                    <span style="padding-top:5px">Reinitialiser</span>
+                </MudButton>
+            </MudItem>
+            <MudItem>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Success"
+                           Disabled=saveClick
+                           OnClick="OnValidSubmit"
+                           StartIcon="@Icons.Material.Filled.SaveAlt">
+                    <span style="padding-top:5px">Enregistrer</span>
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudForm>
 </MudContainer>
 
-
 @code {
-    private string nom, prenom, email, password, repassword;
+    bool success = false;
+    string[] errors = { };
+    MudTextField<string>? pwField1;
+    private string password, repassword;
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    User user = new User();
+    MudForm? form;
+    private bool saveClick = false;
 
+    private async void Reset()
+    {
+        if (success)
+            form.Reset();
+        else
+            form.ResetValidation();
+        saveClick = false;
+    }
+    private async void OnValidSubmit()
+    {
+        form.Validate();
+        if (success)
+        {
+            User? _user = await userService.GetUserByEmailAsync(user.AdressMail);
+            if(_user == null){
+                saveClick = true;
+                user.PasswordHash = BC.HashPassword(user.Password);
+                user.DateCreate = DateTime.Now;
+                user.Password = "";
+                int i = await userService.CreateUserAsync(user);
+                if (i > 0)
+                {
+                    MudDialog.Close(DialogResult.Ok(true));
+                }
+                else
+                {
+                    MudDialog.Close(DialogResult.Ok(false));
+                }
+            }else{
+                Snackbar.Add("Cet adresse mail est déjà utilisé. Contacter l'administrateur pour réinitialiser votre mot de passe.", Severity.Warning);
+            }
+            
+        }
+    }
 
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "Mot de passe requis!";
+            yield break;
+        }
+        if (pw.Length < 8)
+            yield return "Le mot de passe doit être au moins de 8 caractères";
+        if (!Regex.IsMatch(pw, @"[A-Z]"))
+            yield return "Le mot de passe doit contenir au moins une majuscule";
+        if (!Regex.IsMatch(pw, @"[a-z]"))
+            yield return "Le mot de passe doit contenir au moins une lettre minuscule";
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return "Le mot de passe doit contenir au moins un chiffre";
+    }
+
+    private string PasswordMatch(string arg)
+    {
+        if (pwField1.Value != arg)
+            return "Les mots de passe ne correspondent pas";
+        return null;
+    }
 }

@@ -11,7 +11,9 @@ namespace Contrat_AC.Controller.Autorisation
         public Task<bool> CreateRoleAsync(Role role);
         public Task<bool> CreateUserRoleAsync(UsersRole userRole);
         public Task<User?> GetUserByIDAsync(int userID);
+        public Task<User?> GetUserByEmailAsync(string email);
         public Task<List<Role>> GetAllRolesAsync(int userID);
         public Task<List<User>> GetAllUsersAsync();
+        public Task<bool> SupprimerUser(User user);
     }
 }
