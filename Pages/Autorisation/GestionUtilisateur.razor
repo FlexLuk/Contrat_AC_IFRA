@@ -57,18 +57,7 @@
     </PagerContent>
 </MudTable>
 
-<div class="d-flex flex-wrap mt-4">
-    <div style="min-width:200px;">
-        @*<MudText Inline="true" Class="align-self-center">Selected1: @selectedItem1?.FirstName</MudText>*@
-        <MudText Inline="true" Class="align-self-center">Selected1: @rowNumber</MudText>
-    </div>
-</div>
-
 @code {
-    private bool dense = false;
-    private bool hover = true;
-    private bool striped = false;
-    private bool bordered = false;
     private string searchString1 = "";
     private User selectedItem1 = null;
     MudTable<User>? tableUser;
@@ -136,16 +125,12 @@
         }
     }
 
-    void SelectedItemsChanged(HashSet<User> items)
-    {
-        Snackbar.Add("Selected item changed.");
-    }
-
     private string SelectedRowClassFunc(User _user, int rowNumber)
     {
         if (selectedRowNumber == rowNumber)
         {
             selectedRowNumber = -1;
+            selectedItem1 = null;
             return string.Empty;
         }
         else if (tableUser.SelectedItem != null && tableUser.SelectedItem.Equals(_user))
@@ -155,12 +140,11 @@
         }
         else
         {
-
-            this.rowNumber = rowNumber;
+            selectedRowNumber = -1;
+            selectedItem1 = null;
             return string.Empty;
         }
     }
-    int rowNumber;
 
     private async void DeleteUser()
     {
@@ -226,6 +210,7 @@
                     await LoadUserTable();
                     StateHasChanged();
                 }
+                selectedItem1 = null;
             }
         }else{
             Snackbar.Add("Veuillez sélectionner un élément.", Severity.Warning);

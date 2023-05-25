@@ -1,5 +1,12 @@
-﻿
-<MudGrid>
+﻿@using Contrat_AC.Controller.Client
+@using System.Text.RegularExpressions
+@using System.ComponentModel.DataAnnotations
+@inject IClientService clientService
+@inject ISnackbar Snackbar
+
+<MudDivider />
+
+<MudGrid Class="pl-4 pr-4 pb-4">
     <MudItem xs="12">
         <MudGrid>
             <MudItem xs="6" sm="3">
@@ -18,7 +25,7 @@
         <MudGrid>
             <MudItem xs="6" sm="3">
                 <MudSelect T="TypeIdentite" Label="Type de pièce" Margin="Margin.Dense" Variant="Variant.Text" AnchorOrigin="Origin.BottomCenter" Dense>
-                    <MudSelectItem Value="@(new TypeIdentite("Carte d’identité nationale"))" />
+                    <MudSelectItem Value="@(new TypeIdentite("C.I.N"))" />
                     <MudSelectItem Value="@(new TypeIdentite("Passeport"))" />
                     <MudSelectItem Value="@(new TypeIdentite("Carte de résident"))" />
                     <MudSelectItem Value="@(new TypeIdentite("Carte d’identité étranger"))" />
@@ -59,25 +66,36 @@
             </MudItem>
             <MudItem xs="6" sm="3">
                 <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles">
-                    <MudButton HtmlTag="label"
-                               Variant="Variant.Outlined"
-                               Color="Color.Primary"
-                               StartIcon="@Icons.Material.Filled.CloudUpload"
-                               Class="mt-3">
-                        <MudText Typo="Typo.caption"><b>Enregistrer les images de la C.I.N</b></MudText>
-                    </MudButton>
+                    <ButtonTemplate>
+                        <MudButton HtmlTag="label"
+                                   Variant="Variant.Outlined"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.CloudUpload">
+                            <MudText Typo="Typo.caption"><b>Enregistrer les images de la C.I.N</b></MudText>
+                        </MudButton>
+                    </ButtonTemplate>
                 </MudFileUpload>
+                @if (files != null)
+                {
+                    <MudList>
+                        @foreach (var file in files)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.AttachFile">
+                                @file.Name <code>@file.Size bytes</code>
+                            </MudListItem>
+                        }
+                    </MudList>
+                }
             </MudItem>
             <MudItem xs="6" sm="3">
-                <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles">
-                    <MudButton HtmlTag="label"
-                               Variant="Variant.Outlined"
-                               Color="Color.Success"
-                               StartIcon="@Icons.Material.Filled.CloudUpload"
-                               Class="mt-3">
-                        <MudText Typo="Typo.caption"><b>Enregistrer l'image de residence</b></MudText>
-                    </MudButton>
-                </MudFileUpload>
+                <InputFile id="fileInput" hide multiple style="display:none" />
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Success"
+                           for="fileInput"
+                           StartIcon="@Icons.Material.Filled.CloudUpload">
+                    <MudText Typo="Typo.caption"><b>Enregistrer l'image de residence</b></MudText>
+                </MudButton>
             </MudItem>
         </MudGrid>
         <MudDivider Class="mt-4" />
@@ -101,12 +119,12 @@
         </MudGrid>
 
     </MudItem>
-    <MudItem>
-
-    </MudItem>
 </MudGrid>
 
 @code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    
     private string nom = "", prenom = "", fonction = "", typePieceIdentite = "", pays = "", ville = "", delivreA = "", lieuNaissance = "";
     string? cin, domicile, telephone;
     int? codePostale;
@@ -123,17 +141,6 @@
         {
             MaskChars = new[] { new MaskChar('#', @"[0-9]") }
         };
-
-    IList<IBrowserFile> files = new List<IBrowserFile>();
-
-    private void UploadFiles(IReadOnlyList<IBrowserFile> files)
-    {
-        foreach (var file in files)
-        {
-            this.files.Add(file);
-        }
-        //TODO upload the files to the server
-    }
 
     class TypeIdentite
     {
@@ -154,5 +161,19 @@
 
         // Implement this for the Pizza to display correctly in MudSelect
         public override string ToString() => Nom;
+    }
+    private async Task UploadFiles(IReadOnlyList<IBrowserFile> files)
+    {
+        foreach (var file in files)
+        {
+            this.files.Add(file);
+        }
+        //TODO upload the files to the server
+    }
+
+    private async Task UploadFiles2(IBrowserFile file)
+    {
+        files.Add(file);
+        //TODO upload the files to the server
     }
 }

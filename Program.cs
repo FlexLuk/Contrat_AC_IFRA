@@ -1,8 +1,10 @@
 using Blazored.LocalStorage;
 using Contrat_AC.AuthetificationState.Data;
 using Contrat_AC.Controller.Autorisation;
+using Contrat_AC.Controller.Client;
 using Contrat_AC.Data.AuthetificationState;
 using Contrat_AC.Models.Autorisation;
+using Contrat_AC.Models.Client;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -22,11 +24,15 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<ILoginControl, LoginControl>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddScoped<IAutorisationService, AutorisationService>();
+builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddDbContext<AUTORISATIONContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("osiet_connection"));
 });
-
+builder.Services.AddDbContext<CLIENTContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("osiet_connection"));
+});
 
 var app = builder.Build();
 

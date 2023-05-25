@@ -3,19 +3,13 @@
 <MudGrid>
     <MudItem Class="mud-width-full">
         <MudTabs Elevation="2" Rounded="false" Centered="false" Class="" Color="Color.Surface">
-            <MudTabPanel Icon="@Icons.Material.Filled.Add" Text="Ajout de client">
-                <MudContainer Class="mt-4">
-                    <AjoutClientPage />
-                </MudContainer>
-            </MudTabPanel>
-            <MudTabPanel Icon="@Icons.Material.Filled.List" Text="Liste des clients">
-                <MudContainer Class="mt-4">
-                    <ListeClientPage />
-                </MudContainer>
+            <MudTabPanel Icon="@Icons.Material.Filled.PeopleAlt" Text="Liste des clients">
+                <MudPaper style="margin:10px; margin-top:20px">
+                    <ListeClient />
+                </MudPaper>
             </MudTabPanel>
             <MudTabPanel Icon="@Icons.Material.Filled.PostAdd" Text="Informations associées">
                 <MudContainer Class="mt-2">
-                    Flex
                 </MudContainer>
             </MudTabPanel>
         </MudTabs>
