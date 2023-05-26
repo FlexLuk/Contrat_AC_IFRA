@@ -1,0 +1,177 @@
+﻿@using Contrat_AC.Controller.Client
+@using System.Text.RegularExpressions
+@using System.ComponentModel.DataAnnotations
+@inject IClientService clientService
+@inject ISnackbar Snackbar
+
+<MudDivider />
+
+<MudGrid Class="pl-4 pr-4 pb-4">
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="nom" Label="Nom" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="prenom" Label="Prénom" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="fonction" Label="Fonction" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="domicile" Label="Domicile" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+        </MudGrid>
+        <MudGrid>
+            <MudItem xs="6" sm="3">
+                <MudSelect T="TypeIdentite" Label="Type de pièce" Margin="Margin.Dense" Variant="Variant.Text" AnchorOrigin="Origin.BottomCenter" Dense>
+                    <MudSelectItem Value="@(new TypeIdentite("C.I.N"))" />
+                    <MudSelectItem Value="@(new TypeIdentite("Passeport"))" />
+                    <MudSelectItem Value="@(new TypeIdentite("Carte de résident"))" />
+                    <MudSelectItem Value="@(new TypeIdentite("Carte d’identité étranger"))" />
+                    <MudSelectItem Value="@(new TypeIdentite("Carte d’identité resp légal"))" />
+                    <MudSelectItem Value="@(new TypeIdentite("Autre pièce (à fiabiliser)"))" />
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField T="string" @bind-Value="cin" Label="N°de la pièce : " Mask="cinMask" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField T="DateTime?" Format="yyyy-MM-dd" Label="Date de naissance" InputType="InputType.Date" Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="lieuNaissance" Label="Lieu de naissance" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+        </MudGrid>
+        <MudGrid>
+            <MudItem xs="6" sm="3">
+                <MudTextField T="DateTime?" Format="yyyy-MM-dd" Label="Délivre le" Variant="Variant.Text" InputType="InputType.Date" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="delivreA" Label="Délivre à" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="pays" Label="Pays" Variant="Variant.Text" Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="ville" Label="Ville" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+        </MudGrid>
+        <MudGrid>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="codePostale" Label="Code postale" Mask="codePostaleMask" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudTextField @bind-Value="telephone" Label="Téléphone" Mask="telephoneMask" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <InputFile id="fileInput" hide multiple style="display:none" />
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Primary"
+                           for="fileInput"
+                           StartIcon="@Icons.Material.Filled.CloudUpload">
+                    Enregistrer les images de la C.I.N
+                </MudButton>
+                @if (files != null)
+                {
+                    <MudList>
+                        @foreach (var file in files)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.AttachFile">
+                                @file.Name <code>@file.Size bytes</code>
+                            </MudListItem>
+                        }
+                    </MudList>
+                }
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <InputFile id="fileInput" hide multiple style="display:none" />
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Success"
+                           for="fileInput"
+                           StartIcon="@Icons.Material.Filled.CloudUpload">
+                    <MudText Typo="Typo.caption"><b>Enregistrer l'image de residence</b></MudText>
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+        <MudDivider Class="mt-4" />
+        <MudGrid Class="mt-2" Justify="Justify.FlexEnd">
+            <MudItem>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Warning"
+                           StartIcon="@Icons.Material.Filled.RestartAlt">
+                    <span style="padding-top:5px">Réinitialiser</span>
+                </MudButton>
+            </MudItem>
+            <MudItem>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Outlined"
+                           Color="Color.Success"
+                           StartIcon="@Icons.Material.Filled.SaveAlt">
+                    <span style="padding-top:5px">Enregistrer</span>
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+
+    </MudItem>
+</MudGrid>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    
+    private string nom = "", prenom = "", fonction = "", typePieceIdentite = "", pays = "", ville = "", delivreA = "", lieuNaissance = "";
+    string? cin, domicile, telephone;
+    int? codePostale;
+    public PatternMask cinMask = new PatternMask("### ### ### ###")
+        {
+            MaskChars = new[] { new MaskChar('#', @"[0-9]") }
+        };
+    public PatternMask codePostaleMask = new PatternMask("###")
+        {
+            MaskChars = new[] { new MaskChar('#', @"[0-9]") }
+        };
+
+    public PatternMask telephoneMask = new PatternMask("### ## ### ##")
+        {
+            MaskChars = new[] { new MaskChar('#', @"[0-9]") }
+        };
+
+    class TypeIdentite
+    {
+        public readonly string Nom = "";
+        public TypeIdentite(string nom)
+        {
+            Nom = nom;
+        }
+        // Note: this is important so the MudSelect can compare pizzas
+        public override bool Equals(object? o)
+        {
+            var other = o as TypeIdentite;
+            return other?.Nom == Nom;
+        }
+
+        // Note: this is important too!
+        public override int GetHashCode() => Nom?.GetHashCode() ?? 0;
+
+        // Implement this for the Pizza to display correctly in MudSelect
+        public override string ToString() => Nom;
+    }
+    private async Task UploadFiles(IReadOnlyList<IBrowserFile> files)
+    {
+        foreach (var file in files)
+        {
+            this.files.Add(file);
+        }
+        //TODO upload the files to the server
+    }
+
+    private async Task UploadFiles2(IBrowserFile file)
+    {
+        files.Add(file);
+        //TODO upload the files to the server
+    }
+}

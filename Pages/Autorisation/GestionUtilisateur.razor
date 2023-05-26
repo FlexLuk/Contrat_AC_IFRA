@@ -130,6 +130,7 @@
         if (selectedRowNumber == rowNumber)
         {
             selectedRowNumber = -1;
+            selectedItem1 = null;
             return string.Empty;
         }
         else if (tableUser.SelectedItem != null && tableUser.SelectedItem.Equals(_user))
@@ -139,6 +140,8 @@
         }
         else
         {
+            selectedRowNumber = -1;
+            selectedItem1 = null;
             return string.Empty;
         }
     }
@@ -207,6 +210,7 @@
                     await LoadUserTable();
                     StateHasChanged();
                 }
+                selectedItem1 = null;
             }
         }else{
             Snackbar.Add("Veuillez sélectionner un élément.", Severity.Warning);
