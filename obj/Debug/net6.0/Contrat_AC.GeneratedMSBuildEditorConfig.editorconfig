@@ -9,97 +9,93 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Contrat_AC
 build_property.RootNamespace = Contrat_AC
-build_property.ProjectDir = C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA\
+build_property.ProjectDir = C:\Users\Flex\source\repos\Contrat_AC\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Jean Luc\source\repos\Contrat_AC_IFRA
+build_property.MSBuildProjectDirectory = C:\Users\Flex\source\repos\Contrat_AC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/App.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Autorisation/Authentification.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/Authentification.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEF1dGhlbnRpZmljYXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Autorisation/DialogAjoutUtilisateur.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/DialogAjoutUtilisateur.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXERpYWxvZ0Fqb3V0VXRpbGlzYXRldXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Autorisation/DialogDeleteUtilisateur.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/DialogDeleteUtilisateur.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXERpYWxvZ0RlbGV0ZVV0aWxpc2F0ZXVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Autorisation/DialogModifierUtilisateur.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/DialogModifierUtilisateur.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXERpYWxvZ01vZGlmaWVyVXRpbGlzYXRldXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Autorisation/Enregistrement.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/Enregistrement.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEVucmVnaXN0cmVtZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Autorisation/GestionUtilisateur.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Autorisation/GestionUtilisateur.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b3Jpc2F0aW9uXEdlc3Rpb25VdGlsaXNhdGV1ci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Client/ClientPage.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/ClientPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XENsaWVudFBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Client/DialogAjoutClient.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/DialogAjoutClient.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XERpYWxvZ0Fqb3V0Q2xpZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Client/InformationClient.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/InformationClient.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XEluZm9ybWF0aW9uQ2xpZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Client/ListeClient.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Client/ListeClient.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XExpc3RlQ2xpZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Client/ListeClientPage.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XExpc3RlQ2xpZW50UGFnZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Index.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/Autorisation/AuthentificationLayout.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/Autorisation/AuthentificationLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxBdXRoZW50aWZpY2F0aW9uTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/Autorisation/AutorisationNavMenu.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/Autorisation/AutorisationNavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxBdXRvcmlzYXRpb25OYXZNZW51LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/Autorisation/Redirection.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/Autorisation/Redirection.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEF1dG9yaXNhdGlvblxSZWRpcmVjdGlvbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/MainLayout.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Shared/NavMenu.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/_Imports.razor]
+[C:/Users/Flex/source/repos/Contrat_AC/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Error.cshtml]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/_Host.cshtml]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/_Layout.cshtml]
+[C:/Users/Flex/source/repos/Contrat_AC/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

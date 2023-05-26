@@ -99,7 +99,7 @@
     private Client selectedItem1 = null!;
     MudTable<Client>? tableClient;
     private HashSet<Client> selectedItems = new HashSet<Client>();
-    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseButton = true, DisableBackdropClick = true };
+    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseButton = true, DisableBackdropClick = true ,ClassBackground = "my-custom-class"};
 
     private IEnumerable<Client> clients = new List<Client>();
     private int selectedRowNumber = -1;
