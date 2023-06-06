@@ -7,8 +7,7 @@ namespace Contrat_AC.Models.Client;
 public partial class CLIENTContext : DbContext
 {
 
-    public CLIENTContext(DbContextOptions<CLIENTContext> options)
-        : base(options)
+    public CLIENTContext(DbContextOptions<CLIENTContext> options) : base(options)
     {
     }
 

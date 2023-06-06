@@ -15,12 +15,12 @@ namespace Contrat_AC.Controller.Client
         {
             context = _context;
         }
-        public async Task<Cliente?> CreateClient(Cliente client)
+        public async Task<bool> CreateClient(Cliente client)
         {
             Cliente cli = client;
             await context.Clients.AddAsync(cli);
-            context.SaveChanges();
-            return cli;
+            int i = context.SaveChanges();
+            return i > 0;
         }
 
         public async Task<bool> DeleteClient(Cliente client)

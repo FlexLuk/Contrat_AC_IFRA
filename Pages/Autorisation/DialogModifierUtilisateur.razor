@@ -94,6 +94,7 @@
                 user.PasswordHash = BC.HashPassword(user.Password);
                 user.DateCreate = DateTime.Now;
                 user.Password = "";
+                //AMBOARY ETO, OVANA UPDATE
                 int i = await userService.CreateUserAsync(user);
                 if (i > 0)
                 {
