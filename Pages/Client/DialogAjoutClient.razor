@@ -69,14 +69,16 @@
                 </MudFileUpload>
             </MudItem>
             <MudItem xs="6" sm="3">
-                <InputFile id="fileInput" hide multiple style="display:none" />
-                <MudButton HtmlTag="label"
-                           Variant="Variant.Outlined"
-                           Color="Color.Success"
-                           for="fileInput"
-                           StartIcon="@Icons.Material.Filled.CloudUpload">
-                    <MudText Typo="Typo.caption"><b>Enregistrer l'image de residence</b></MudText>
-                </MudButton>
+                <MudFileUpload Context="contextRES" T="IBrowserFile" FilesChanged="UploadFilesRESIDENCE" Accept=".pdf" MaximumFileCount="1" Required="false">
+                    <ButtonTemplate>
+                        <MudFab HtmlTag="label" Size=Size.Small
+                                Color="Color.Surface"
+                                Icon="@Icons.Material.Filled.PictureAsPdf"
+                                Label="RESIDENCE, .pdf"
+                                for="@contextRES" />
+                    </ButtonTemplate>
+                </MudFileUpload>
+
             </MudItem>
         </MudGrid>
         <MudDivider Class="mt-4" />
@@ -115,8 +117,7 @@
 
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-    IList<IBrowserFile> files = new List<IBrowserFile>();
-    
+    string nameCIN = "", nameRES = "";
     private string nom = "", prenom = "", fonction = "", typePieceIdentite = "", pays = "", ville = "", delivreA = "", lieuNaissance = "";
     string? cin, domicile, telephone;
     int? codePostale;
@@ -124,7 +125,7 @@
     MudForm form;
     bool success;
     string[] errors = { };
-    private Contrat_AC.Models.Client.Client client =new();
+    private Contrat_AC.Models.Client.Client client = new();
 
     public PatternMask cinMask = new PatternMask("### ### ### ###")
         {
@@ -159,18 +160,43 @@
         // Implement this for the Pizza to display correctly in MudSelect
         public override string ToString() => Nom;
     }
-    private async Task UploadFiles(IReadOnlyList<IBrowserFile> files)
+
+    IBrowserFile fileCIN, fileRES;
+    private void UploadFilesCIN(IBrowserFile file)
     {
-        foreach (var file in files)
-        {
-            this.files.Add(file);
-        }
-        //TODO upload the files to the server
+        fileCIN = file;
+        nameCIN = file.Name;
+        StateHasChanged();
     }
 
-    private async Task UploadFiles2(IBrowserFile file)
+    private void UploadFilesRESIDENCE(IBrowserFile file)
     {
-        files.Add(file);
-        //TODO upload the files to the server
+        fileRES = file;
+        nameRES = file.Name;
+        StateHasChanged();
+    }
+
+    private void Reinitialiser()
+    {
+        form.ResetValidation();
+        fileCIN = null;
+        fileRES = null;
+        nameCIN = "";
+        nameRES = "";
+        StateHasChanged();
+    }
+
+    private async Task OnValideSubmit()
+    {
+        form.Validate();
+        if (success)
+        {
+
+        }
+    }
+
+    private async Task SendFileToServer()
+    {
+
     }
 }
