@@ -60,7 +60,11 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50XExpc3RlQ2xpZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< HEAD
 [C:/Users/Flex/source/repos/Contrat_AC/Pages/Index.razor]
+=======
+[C:/Users/Jean Luc/source/repos/Contrat_AC_IFRA/Pages/Index.razor]
+>>>>>>> refs/remotes/origin/Flex
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
